@@ -1,6 +1,8 @@
 # Beamer for UESTC
 
-This is a Beamer template for UESTC. 
+This is a Beamer template for UESTC students. (English Ver.)
+
+Based on [THU-Beamer](https://www.overleaf.com/latex/templates/thu-beamer-theme/vwnqmzndvwyb) and [UESTC-Beamer](https://www.overleaf.com/latex/templates/uestc-beamer-theme/ybqzdsgvrfdq) (Chinese Ver.).
 
 *You are welcome to use and distribute it.*
 
@@ -13,5 +15,4 @@ This is a Beamer template for UESTC.
 
 Zhengren Wang 
 
-4/1/2022
-
+4/11/2022

@@ -31,10 +31,8 @@
   }
 \makeatother
 
-\useinnertheme{circles}
-
-%\useoutertheme{default}
-%\useinnertheme[shadow=true]{rounded}
+\useoutertheme{default}
+\useinnertheme[shadow=true]{rounded}
 
 \setbeamersize{text margin left=0.5cm,text margin right=0.5cm} %margin
 
@@ -43,9 +41,20 @@
 \setbeamercolor{frametitle}{bg=uestc,fg=white}
 \setbeamercolor{title}{bg=uestc}
 \setbeamerfont{frametitle}{size=\large}
-%\setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{bibliography item}[text]
 \setbeamertemplate{caption}[numbered]
+\setbeamertemplate{theorems}[numbered]
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{problem}{Problem}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+%\setbeamertemplate{navigation symbols}{}
+
 
 \setbeamercolor{palette primary}{use=structure,fg=white,bg=structure.fg}
 \setbeamercolor{palette secondary}{use=structure,fg=white,bg=structure.fg!85!black}
@@ -85,3 +94,22 @@
 
 \mode
 <all>
+
+% % defs
+% \def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
+% \def\env#1{\texttt{\color{blue}\footnotesize #1}}
+% \definecolor{deepblue}{rgb}{0,0,0.5}
+% \definecolor{deepred}{rgb}{0.6,0,0}
+% \definecolor{deepgreen}{rgb}{0,0.5,0}
+% \definecolor{halfgray}{gray}{0.55}
+
+% \lstset{
+%     basicstyle=\ttfamily\small,
+%     keywordstyle=\bfseries\color{deepblue},
+%     emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
+%     stringstyle=\color{deepgreen},
+%     numbers=left,
+%     numberstyle=\small\color{halfgray},
+%     rulesepcolor=\color{red!20!green!20!blue!20},
+%     frame=shadowbox,
+% }

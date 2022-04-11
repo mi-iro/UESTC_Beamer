@@ -1,4 +1,4 @@
-\documentclass[9pt]{beamer} %global font-size
+\documentclass[9pt,notheorems]{beamer} %global font-size
 \usepackage{UESTC}
 
 \usepackage{hyperref}
@@ -8,33 +8,12 @@
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{multirow}
 \usepackage{pgfpages}
-\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 
 \author{Zhengren Wang}
 \title{Listing Maximal $k$-Plexes in Large Real-World Graphs}
 \subtitle{Zhengren Wang, Yi Zhou, Mingyu Xiao, Bakhadyr Khoussainov}
 \institute{Algorithms and Logic Group in UESTC}
 \date{\today}
-
-
-% defs
-\def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
-\def\env#1{\texttt{\color{blue}\footnotesize #1}}
-\definecolor{deepblue}{rgb}{0,0,0.5}
-\definecolor{deepred}{rgb}{0.6,0,0}
-\definecolor{deepgreen}{rgb}{0,0.5,0}
-\definecolor{halfgray}{gray}{0.55}
-
-\lstset{
-    basicstyle=\ttfamily\small,
-    keywordstyle=\bfseries\color{deepblue},
-    emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
-    stringstyle=\color{deepgreen},
-    numbers=left,
-    numberstyle=\small\color{halfgray},
-    rulesepcolor=\color{red!20!green!20!blue!20},
-    frame=shadowbox,
-}
 
 \begin{document}
 
@@ -50,6 +29,7 @@
 \begin{frame}
     \tableofcontents[sectionstyle=show,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 \end{frame}
+
 \section{Background}
 \begin{frame}{Finding Cohesive Groups}
     \vspace{0.5cm}
@@ -335,21 +315,6 @@
         \end{itemize}
     \end{minipage}
 \end{frame}
-% \begin{frame}{ListPlex}
-%     \framesubtitle{Listing Large Maximal $k$-Plexes}
-%     A constraint on the number of common-neighbors can be derived from lower bound $l$.
-%     \begin{lemma}
-%         Assume $G[P]$ is a $k$-plex of $G=(V,E)$, $|P|\ge l$.\\
-%         For any two vertices $u,v \in P$, \\
-%         if $(u,v)\in E$, then $|N(u)\cap N(v) \cap P| \ge l-2k$,\\
-%         if $(u,v)\notin E$, then $|N(u)\cap N(v) \cap P| \ge l-2k+2$.
-%     \end{lemma}
-%     % \pause
-%     % \vspace{0.5cm}
-%     % \begin{center}
-%     %     Hence, there are some pruning rules for large $k$-plexes.        
-%     % \end{center}
-% \end{frame}
 \begin{frame}{ListPlex}
     \framesubtitle{Listing Large Maximal k-Plexes}
     With lower bound $l$, a related lower bound $l'$ can be derived.
@@ -367,35 +332,6 @@
         \item Consider vertex pair $(u,v)$ from some $S$.
     \end{itemize}       
 \end{frame}
-% \begin{frame}{ListPlex}
-%     \framesubtitle{Listing Large Maximal k-Plexes - Pruning seed graph $G_i$}
-%     Removing unfruitful candidates from $G_i$ reduces the scale of $G_i$.\\
-%     Consider the common-neighbors of $v_i$ and some vertex $u$.
-%     \begin{prune}
-%     \label{prune_size}
-%     Assume $u\in V_i$, if $u$ satisfies
-%     \begin{itemize}
-%       \item $(u,v_i)\in E$ and $|N(u)\cap N(v_i)\cap V_i| < l-2k$,
-%       \item or $(u,v_i)\notin E$ and $|N(u) \cap N(v_i)\cap V_i| < l-2k+2$,
-%     \end{itemize}
-%     \end{prune}
-%     then $u$ can be excluded from $G_i$ without affecting the correctness of ListPlex.
-    
-% \end{frame}
-% \begin{frame}{ListPlex}
-%     \framesubtitle{Listing Large Maximal k-Plexes - Excluding unfruitful seed sets}
-%     Dropping unfruitful seed sets $P_s$ saves the forthcoming exponential search.\\
-%     Consider the common-neighbors of some vertex pair $(u,v)$ from $N^2_{\succ_\eta}(v_i)$.
-%     \begin{prune}
-%     \label{prune_common}
-%     Given a seed graph $G_i=(V_i,E_i)$, a seed set $P_s=\{v_i\}\cup S$ where $S\subseteq N^2_{\succ_\eta}(v_i)$ and $|S|\le k-1$. Denote $C_s = N_{\succ_\eta}(v_i)$. For any two vertices $u,v \in S$, if
-%     \begin{itemize}
-%       \item $(u,v)\in E$ and $|N_{G_i}(u) \cap N_{G_i}(v) \cap C_s| < l-2k-max(k-3,0)$,
-%       \item or $(u,v)\notin E$ and $|N_{G_i}(u) \cap N_{G_i}(v) \cap C_s| < l-2k+2-max(k-3,0)$.
-%     \end{itemize}
-%     then $P_s$ can be dropped without affecting the correctness of ListPlex.
-%     \end{prune}
-% \end{frame}
 \section{Implementation Techniques}
 \begin{frame}{Reducing cache misses}
     Validating maximality in $G$ for maximal $k$-plex of $G_i$ suffers a high amount of cache misses.\\
@@ -633,63 +569,6 @@
 \end{frame}
 
 % \section{Appendix}
-% \begin{frame}{Branch Scheme}
-%     \begin{center}
-%         \resizebox{0.7\linewidth}{!}{
-%             \begin{algorithm}[H]
-%                 \DontPrintSemicolon
-%                 % \scriptsize
-%                     \caption{The BKPivot algorithm.}
-%                     \label{alg_pivot}
-%                    % \KwIn{a graph $G=(V,E)$, an integer $k>1$, disjoint sets $P,C$ and $X \subseteq V$. $G[P]$ must be a $k$-plex.}
-%                   %  \KwOut{all vertex sets that induce maximal $k$-plexes. The vertex set must include $P$, possibly include some vertices $C$ and  must not include $X$ form $G$. }
-%                     %\tcc{For brevity, we omit $G'_>,G,k,q$ in subcalls}
-%                     \emph{BKPivot}$(G,k,P,C,X)$\\
-%                     \Begin{
-%                          $C \gets \{v: v\in C \mbox{ and $G[\{v\}\cup{P}]$ is a $k$-plex} \}$\\
-%                          $X \gets \{v: v\in X \mbox{ and $G[\{v\}\cup{P}]$ is a $k$-plex} \}$ \\
-%                          \If {$C= \emptyset$}{
-%                             \If{$X= \emptyset$}{
-%                                 emit $P$ \\
-%                             }
-%                            \Return
-%                         }
-%                         Find a vertex of minimum degree $u_p$ in $G[P\cup C]$\\
-%                         \If{$|N(u_p)|\ge |P|+|C|-k$}{
-%                             \If{$\nexists v\in X$ that $G[P\cup C \cup \{v\}]$ is a k-plex}{
-%                                 emit $P\cup C$
-%                             }
-%                         }\ElseIf {$u_p\in P$}{
-%                                 Let $u_1,...,u_{q_2}$ be an arbitrary ordering of $C\setminus N(u_p)$\\
-%                                 $k'\gets k-|P\setminus N(u_p)|$\\
-%                                 \emph{BKPivot}$(G,k,P,C\setminus \{u_1\},X\cup\{u_1\})$ \\
-%                                  \For{$i\in \{2,...,k'\}$}{
-%                                      \emph{BKPivot}$(G,k,P\cup \{u_1,...,u_{i-1}\}, C\setminus \{u_1,...,u_{i}\}, X\cup \{u_i\})$ \\
-%                                  }
-%                                 \emph{BKPivot}$(G,k,P\cup \{u_1,...,u_k'\}, C\setminus\{u_1,...,u_{q_2}\}, X)$\\
-            
-%                         }\Else{
-%                             \emph{BKPivot}$(G,k,P,C\setminus \{u_p\},X\cup\{u_p\})$ \\
-%                             \emph{BKPivot}$(G,k,P\cup\{u_p\}, C\setminus \{u_p\}, X)$ \\
-            
-%                         }
-%                     }
-%             \end{algorithm}
-%         }
-%     \end{center}
-% \end{frame}
-% \begin{frame}{Branch Scheme}
-%     \begin{figure}[H]
-%         \includegraphics[width=0.7\linewidth]{pic/bkpivot.pdf}\\
-%         \caption{
-%             An example of BKPivot's branch scheme with $k=4$.
-
-%             In node 1, pivot $u_p=1 \in P$, $P\setminus N(u_p)=\{1,2\}$ and $C\setminus N(u_p)=\{3,4,5,7\}$. At most $k'=k-|P\setminus N(u_p)|=2$ non-neighbors of $u_p$ can be moved from $C$ to $P$.
-            
-%             In node 3, there are several vertices of minimum degree. Assume pivot $u_p=7 \in C$, node 3 generates two branches by moving $u_p$ to $X$ or $P$.
-%         }
-%     \end{figure}
-% \end{frame}
 % \begin{frame}{Experiment Setup}
 %     \begin{itemize}
 %         \item C++11 and g++-9.3.0 with '-O3',
